@@ -105,7 +105,7 @@ def create_qwen_prompt_vllm(question, method, few_shot_samples):
     prompt = ""
     # Add the main question and options
     prompt += (
-        f"\n{INSTRUCTION}\n"
+        #f"\n{INSTRUCTION}\n"
         f"\n{keywords[lang]['question']}: {question['question']}\n"
         f"{keywords[lang]['options']}:\n"
     )
@@ -117,14 +117,14 @@ def create_qwen_prompt_vllm(question, method, few_shot_samples):
     if question["image"] is not None:
         images = [question["image"]]
         message = (
-            f"<|im_start|>system\n{SYS_MESSAGE}<|im_end|>\n"
+            f"<|im_start|>system\n{INSTRUCTIONS_COT[lang]}<|im_end|>\n"
             f"<|im_start|>user\n<|vision_start|><|image_pad|><|vision_end|>\n"
             f"{prompt}<|im_end|>\n"
             "<|im_start|>assistant\n"
         )
     else:
         message = (
-            f"<|im_start|>system\n{SYS_MESSAGE}<|im_end|>\n"
+            f"<|im_start|>system\n{INSTRUCTIONS_COT[lang]}<|im_end|>\n"
             f"{prompt}<|im_end|>\n"
             "<|im_start|>assistant\n"
         )
